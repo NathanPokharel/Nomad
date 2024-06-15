@@ -1,0 +1,51 @@
+package partials
+
+templ Base(Title string, styles, scripts templ.Component) {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<title>{ Title }</title>
+			<link rel="stylesheet" href="/static/base-styles.css"/>
+			@styles
+			<style>
+            @import url('https://fonts.cdnfonts.com/css/pp-neue-montreal');
+            *{
+                margin:0;
+                padding:0;
+                font-family: 'PP Neue Montreal', sans-serif;
+            }
+            nav{
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                a{
+                    text-decoration:none;
+                    color:#000;
+                    font-size:20px;
+                    margin:0.5em;
+                }
+                .logo{
+                    font-weight:500;
+                }
+            }
+
+
+            </style>
+		</head>
+		<body>
+        <nav>
+            <a href="#"> Instagram. </a>
+            <a href="#" class="logo"> Nomad. </a>
+            <a href="#"> Facebook. </a>
+        </nav>
+
+			<div class="ultimate-container">
+				{ children... }
+			</div>
+			<script src="https://unpkg.com/htmx.org@1.9.12/dist/htmx.js" integrity="sha384-qbtR4rS9RrUMECUWDWM2+YGgN3U4V4ZncZ0BvUcg9FGct0jqXz3PUdVpU1p0yrXS" crossorigin="anonymous"></script>
+			@scripts
+		</body>
+	</html>
+}

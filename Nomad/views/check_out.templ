@@ -1,0 +1,29 @@
+package views
+
+import "github.com/NathanPokharel/Nomad/views/partials"
+
+templ checkout_css() {
+}
+
+templ checkout_js() {
+}
+
+templ CheckOut(title string, results [][]string) {
+	@partials.Base("Products", checkout_css(), checkout_js()) {
+		<h1>Check Out Page </h1>
+		for _,item := range results {
+			if item[0] == title {
+				<div class="product-description" onclick="sendData(this)">
+					<div class="image-holder">
+						<img src={ "http://0.0.0.0:8080/static/" + item[2] } alt=""/>
+					</div>
+					<div class="descriptions">
+						<div class="title">{ item[0] }</div>
+						<div class="description">{ item[1] }</div>
+						<div class="price">{ item[3] }</div>
+					</div>
+				</div>
+			}
+		}
+	}
+}

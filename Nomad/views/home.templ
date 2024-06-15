@@ -1,0 +1,33 @@
+package views
+
+import "github.com/NathanPokharel/Nomad/views/partials"
+
+templ home_links() {
+	<style>
+        .container{
+            max-width:100%;
+            overflow:hidden;
+        }
+        .container img{
+            width:100%;
+            height:auto;
+        }
+        .button{
+            position:absolute;
+            top:0;
+            left:0;
+            transform:translate(-50%,-50%);
+        }
+    </style>
+}
+
+templ home_scripts() {
+}
+
+templ Home() {
+	@partials.Base("Nomad.", home_links(), home_scripts()) {
+		<div class="container">
+			<img src="https://placehold.co/1920x1080" alt=""/>
+		</div>
+	}
+}

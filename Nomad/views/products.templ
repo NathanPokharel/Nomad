@@ -1,0 +1,86 @@
+package views
+
+import "github.com/NathanPokharel/Nomad/views/partials"
+
+templ product_css() {
+	<style>
+    .container{
+        display:flex;
+        flex-direction:row;
+        height:100vh;
+        width:100vw;
+        gap:0.5em;
+        justify-content:space-evenly;
+        align-items:center;
+    }
+    .poster{
+        cursor:pointer;
+        transition: 0.2s ease-in-out;
+    }
+    .poster:hover{
+        transform:translateY(-5%);
+    }
+    @media(min-width:1100px){
+    overflow-y:hidden;
+}
+@media (max-width:1100px){
+  .container {
+    flex-wrap:wrap;
+    overflow-x:hidden;
+    justify-content:center;
+    align-items:center;
+    margin:0;
+  }
+  body{
+      overflow-y:scroll;
+      overflow-x:hidden;
+  }
+}
+@media (max-width: 800px) {
+    .poster img{
+        width:100%;
+        height:auto;
+    }
+  .container {
+    flex-direction:row;
+    overflow-x:hidden;
+    margin:0;
+  }
+  body{
+      overflow-y:scroll;
+      overflow-x:hidden;
+  }
+}
+
+
+
+    </style>
+}
+
+templ product_js() {
+	<script>
+        function transformScroll(event) {
+            if (!event.deltaY) {
+                return;
+            }
+
+            event.currentTarget.scrollLeft += event.deltaY + event.deltaX;
+            event.preventDefault();
+        }
+    var element = document.scrollingElement || document.documentElement;
+    element.addEventListener('wheel', transformScroll);
+    </script>
+}
+
+templ Products(product_description [][]string) {
+	@partials.Base("Products", product_css(), product_js()) {
+		<div class="container">
+			for _,item := range product_description {
+				<div class="poster" onclick="sendData(this)" data-value={ item[0] }>
+					<!--<img src={ "http://0.0.0.0:8080/static/" + item[2] } alt=""/>-->
+					<img src="https://placehold.co/400x600" alt=""/>
+				</div>
+			}
+		</div>
+	}
+}
